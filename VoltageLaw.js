@@ -6,6 +6,9 @@ var KVL={
         for(var i=0;i<connected.length;i++){
             connected[i]=[];
             points[i].index=i;
+            if(isNaN(points[i].voltage)){
+                points[i].voltage=undefined;
+            };
         }
         for(var i=0;i<lines.length;i++){
             connected[(searchPoint(lines[i].from.uuid))].push(lines[i]);
@@ -58,7 +61,7 @@ var KVL={
                                 alert("an invalid was found!!");
                                 return;
                             }
-                        }else{
+                        }else if(l.voltage!=undefined){
                             reserved1.push(idxp1);
                             voltage[idxp1]=v1;
                         }
@@ -78,7 +81,7 @@ var KVL={
                                 alert("an invalid was found!!"+(voltage[idxp1])+","+(voltage[pidx]));
                                 return;
                             }
-                        }else{
+                        }else if(l.voltage!=undefined){
                             reserved1.push(idxp1);
                             voltage[idxp1]=v1;
                         }

@@ -151,7 +151,7 @@ vBox.addEventListener("change",function(e){
     if(vBox.value==""||vBox.value==null){
         selected.voltage=undefined;
     }else{
-        selected.voltage=vBox.value;
+        selected.voltage=Number(vBox.value);
     }
     console.log("aaa");
 });
