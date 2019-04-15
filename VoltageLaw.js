@@ -55,7 +55,7 @@ var KVL={
                                voltage[idxp1]!=undefined&&
                                Math.abs(voltage[idxp1]-v1)>0.01){
                                 console.log(voltage);
-                                alert("contradiction found!!");
+                                alert("an invalid was found!!");
                                 return;
                             }
                         }else{
@@ -75,7 +75,7 @@ var KVL={
                                voltage[idxp1]!=undefined&&
                                Math.abs(voltage[idxp1]-v1)>0.01){
                                 console.log(voltage);
-                                alert("contradiction found!!"+(voltage[idxp1])+","+(voltage[pidx]));
+                                alert("an invalid was found!!"+(voltage[idxp1])+","+(voltage[pidx]));
                                 return;
                             }
                         }else{

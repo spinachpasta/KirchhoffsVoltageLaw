@@ -81,27 +81,27 @@ setInterval(function(){
 },30);
 
 function deleteitem(){
-        if(true||confirm("Are you sure you want to delete selected item?")){
-            if(selected!=undefined){
-                if(selected.type=="line"){
-                    var i=searchline(selected);
-                    lines.splice(i,1);
-                }
-                if(selected.type=="point"){
-                    var idx=searchPoint(selected.uuid);
-                    var ls=[];
-                    for(var i=0;i<lines.length;i++){
-                        if(lines[i].from!=selected&&lines[i].to!=selected)ls.push(lines[i]);
-                    }
-                    lines=ls;
-                    if(idx>=0)
-                    points.splice(idx,1);
-                }
+    if(true||confirm("Are you sure you want to delete selected item?")){
+        if(selected!=undefined){
+            if(selected.type=="line"){
+                var i=searchline(selected);
+                lines.splice(i,1);
             }
-        }else{
-
+            if(selected.type=="point"){
+                var idx=searchPoint(selected.uuid);
+                var ls=[];
+                for(var i=0;i<lines.length;i++){
+                    if(lines[i].from!=selected&&lines[i].to!=selected)ls.push(lines[i]);
+                }
+                lines=ls;
+                if(idx>=0)
+                    points.splice(idx,1);
+            }
         }
+    }else{
+
     }
+}
 
 function select(x,y){
     var md=Infinity;
@@ -231,8 +231,10 @@ function Render(){
     ctx.strokeWidth=4;
     for(var i=0;i<lines.length;i++){
         ctx.strokeStyle="rgb(100,100,100)";
+        ctx.fillStyle="rgb(150,150,150)";
         if(selected==lines[i]){
             ctx.strokeStyle="rgb(255,0,0)";
+            ctx.fillStyle="rgb(255,0,0)";
         }
         ctx.beginPath();
         var p1=lines[i].from;
@@ -243,23 +245,40 @@ function Render(){
         ax*=0.5;
         var ay=p1.y+p2.y;
         ay*=0.5;
-        ctx.font = "20px Georgia";
         ctx.textAlign="left";
         var voltage=lines[i].voltage;
-        ctx.fillStyle="rgb(0,0,0)";
         var nv=normalized(getVector(p2.x,p2.y,p1.x,p1.y));
         var normal=getrotatedVector(nv,Math.PI/2);
         var normal1=getrotatedVector(nv,-Math.PI/2);
 
-        var arrow=getrotatedVector(nv,Math.PI*2-0.4);
-        var arrow1=getrotatedVector(nv,0.4);
+        var arrow=getrotatedVector(nv,-0.3);
+        var arrow1=getrotatedVector(nv,0.3);
 
-        ctx.moveTo(ax,ay);
-        ctx.lineTo(ax+arrow.x*10,ay+arrow.y*10);
-        ctx.lineTo(ax+arrow1.x*10,ay+arrow1.y*10);
-        ctx.lineTo(ax,ay);
         ctx.stroke();
 
+        ctx.beginPath();
+
+        ctx.moveTo(ax,ay);
+        ctx.lineTo(ax+arrow.x*30,ay+arrow.y*30);
+        ctx.lineTo(ax+arrow1.x*30,ay+arrow1.y*30);
+        ctx.lineTo(ax,ay);
+        ctx.fill();
+        ctx.font = "32px Georgia";
+        ctx.fillStyle="rgb(255,255,255)";
+        if(voltage!=undefined){
+            ctx.fillText(voltage,ax+1,ay-1);
+            ctx.fillText(voltage,ax+1,ay+1);
+            ctx.fillText(voltage,ax-1,ay-1);
+            ctx.fillText(voltage,ax-1,ay+1);
+        }else{
+            ctx.fillText("undefined",ax+1,ay-1);
+            ctx.fillText("undefined",ax+1,ay+1);
+            ctx.fillText("undefined",ax-1,ay-1);
+            ctx.fillText("undefined",ax-1,ay+1);
+        }
+        
+        ctx.font = "30px Georgia";
+        ctx.fillStyle="rgb(0,0,0)";
         if(voltage!=undefined){
             ctx.fillText(voltage,ax,ay);
         }else{
@@ -280,7 +299,7 @@ function getrotatedVector(obj,angle){
     var x=obj.x;
     var y=obj.y;
     var c=Math.cos(angle);
-    var s=Math.cos(angle);
+    var s=Math.sin(angle);
 
     return {x:c*x-s*y,y:c*y+s*x};
 }
