@@ -148,7 +148,7 @@ function onradio(){
 }
 
 vBox.addEventListener("change",function(e){
-    if(vBox.value==""||selected.voltage==null){
+    if(vBox.value==""||vBox.value==null){
         selected.voltage=undefined;
     }else{
         selected.voltage=vBox.value;
