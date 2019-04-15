@@ -208,8 +208,8 @@ function addLine(x,y){
     }
     if(pselect==1){
         ps2=ss;
-        //var ll=new KVL.Line(ps1,ps2,undefined);
-        var ll=new KVL.Line(ps1,ps2,1);
+        var ll=new KVL.Line(ps1,ps2,undefined);
+        //var ll=new KVL.Line(ps1,ps2,1);
         lines.push(ll);
         pselect=-1;
     }
