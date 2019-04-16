@@ -58,7 +58,7 @@ var KVL={
                                voltage[idxp1]!=undefined&&
                                Math.abs(voltage[idxp1]-v1)>0.01){
                                 console.log(voltage);
-                                alert("an invalid was found!!");
+                                alert("an invalid loop was found!!");
                                 return;
                             }
                         }else if(l.voltage!=undefined){
@@ -78,7 +78,7 @@ var KVL={
                                voltage[idxp1]!=undefined&&
                                Math.abs(voltage[idxp1]-v1)>0.01){
                                 console.log(voltage);
-                                alert("an invalid was found!!"+(voltage[idxp1])+","+(voltage[pidx]));
+                                alert("an invalid loop was found!!"+(voltage[idxp1])+","+(voltage[pidx]));
                                 return;
                             }
                         }else if(l.voltage!=undefined){
